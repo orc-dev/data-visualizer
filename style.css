@@ -1,0 +1,17 @@
+body {
+    margin: 20px;
+    padding: 0;
+}
+
+.visualization-container {
+    margin-top: 20px; /* Reduce space above each visualization */
+    padding: 10px;
+}
+
+h2 {
+    margin-bottom: 10px; /* Reduce space below puzzle title */
+}
+
+input[type="file"] {
+    margin-bottom: 10px; /* Adjust space below file selector */
+}
