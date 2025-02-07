@@ -1,0 +1,6 @@
+# Ignore macOS system files
+.DS_Store
+
+# Ignore output files (PDFs, generated data)
+output/
+data/
