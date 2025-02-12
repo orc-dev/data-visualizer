@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Data Visualizer</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="./style.css">
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+    <link rel='stylesheet' href='./style.css'>
 </head>
 <body>
     <h1>Data Visualizer</h1>
     <!-- File Input -->
-    <input type="file" id="fileInput" accept=".csv">
-    <p id="fileName">No file selected</p>
+    <input type='file' id='fileInput' accept='.csv'>
+    <p id='fileName'>No file selected</p>
 
-    <script type="module" src="./src/main.js"></script>
+    <div id='gameBoardContainer'>
+        <svg id='svgBoard' width='100%' height='100%'>
+            <g id='svgCoord'></g>
+        </svg>
+    </div>
+    <script type='module' src='./src/main.js'></script>
 </body>
 </html>

@@ -1,5 +1,23 @@
 import { COLUMN_NAMES } from './constants.js';
 
+/** Export a list of functions for data reading/parsing. */
+function extractMetaData(rawMeta) {
+    let metaData = {};
+
+    rawMeta.forEach(line => {
+        if (line.startsWith("#")) {
+            // Remove '#' and split at ':'
+            const parts = line.slice(1).split(":"); 
+            if (parts.length === 2) {
+                const key   = parts[0].trim();
+                const value = parts[1].trim();
+                metaData[key] = value;
+            }
+        }
+    });
+    return metaData;
+}
+
 // Function to check if CSV columns match the expected ones
 function validateColumns(csvColumns) {
     return JSON.stringify(csvColumns) === JSON.stringify(COLUMN_NAMES);
@@ -65,34 +83,19 @@ export function groupByPuzzle(gameData) {
 }
 
 
-function extractMetaData(rawMeta) {
-    let metaData = {};
-
-    rawMeta.forEach(line => {
-        if (line.startsWith("#")) {
-            const parts = line.slice(1).split(":"); // Remove '#' and split at ':'
-            if (parts.length === 2) {
-                const key   = parts[0].trim();
-                const value = parts[1].trim();
-                metaData[key] = value;
-            }
-        }
-    });
-    return metaData;
-}
-
 export function extractHMS(timestamp) {
-    const parts = timestamp.split(':')
-                           .map(num => parseInt(num, 10));
+    const parts = timestamp.split(':').map(num => parseInt(num, 10));
 
     if (parts.length !== 3 || parts.some(isNaN)) {
-        console.error(`Invalid timestamp format: ${timestamp}`);
-        // Return null values if invalid
-        return { hh: null, mm: null, ss: null }; 
+        throw new Error(`Invalid timestamp format: ${timestamp}`);
     }
     return {
         hh: parts[0], // Hours
         mm: parts[1], // Minutes
         ss: parts[2]  // Seconds
     };
+}
+
+export function toDailySeconds(hmsObject) {
+    return hmsObject.hh * 3600 + hmsObject.mm * 60 + hmsObject.ss;
 }

@@ -3,15 +3,37 @@ body {
     padding: 0;
 }
 
-.visualization-container {
-    margin-top: 20px; /* Reduce space above each visualization */
-    padding: 10px;
-}
-
 h2 {
     margin-bottom: 10px; /* Reduce space below puzzle title */
 }
 
 input[type="file"] {
     margin-bottom: 10px; /* Adjust space below file selector */
+}
+
+.visualization-container {
+    margin-top: 20px; /* Reduce space above each visualization */
+    padding: 10px;
+    background-color: rgb(240, 240, 240);
+}
+
+#gameBoardContainer {
+    position: fixed;  /* Stays in place when scrolling */
+    top: 10px;        /* Distance from the top */
+    right: 10px;      /* Distance from the right */
+    width: 320px;     /* Width of the board */
+    height: 220px;    /* Height of the board */
+    
+    background-color: rgba(245, 245, 245, 0.95); /* Slightly more opaque */
+    background-color: rgba(226, 226, 226, 0.95); /* Slightly more opaque */
+    border: 1px solid rgb(200, 200, 200); /* Softer border color */
+    border-radius: 8px; /* Rounded corners */
+    
+    z-index: 1000;    /* Ensures it is always on top */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 5px; /* Adds space around SVG */
+    pointer-events: auto; /* Ensures interaction with the SVG */
 }
