@@ -29,10 +29,12 @@ export function extractRawData(lines) {
 
     // Extract metadata and find the data start
     for (let line of lines) {
+        line = line.trim();
+
         if (line.startsWith('#')) {
             rawMetaData.push(line);  // Store meta comments
         } 
-        else if (line.length === 0) {
+        else if (line === "" || /^[,]+$/.test(line)) {
             continue;
         } 
         else {
