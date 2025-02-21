@@ -246,8 +246,9 @@ function updatePieces(dataPoint) {
     pieceKeys.forEach(key => {
         const px = unit * dataPoint[`${key}_X`];
         const py = unit * dataPoint[`${key}_Y`];
-        const dg = dataPoint[`${key}_R`];
         const sx = (key === 'PL' && dataPoint[`${key}_F`] === 180) ? -1 : 1;
+        const dg = dataPoint[`${key}_R`] * sx;
+        
         SVG_PIECE[key].setAttribute(
             'transform',
             `translate(${px}, ${py}) rotate(${dg}) scale(${sx},1)`

@@ -181,6 +181,19 @@ export const PUZZLE_LIST = Object.freeze({
         }, 
         {px: -1, py: -3, rz: 0}
     ),
+
+    'Rocket': new Puzzle('Rocket', 
+        {
+            'TL0': {px: -3.0, py: 1.0, rz: 180},
+            'TL1': {px: -1.0, py: -1.0, rz: 0},
+            'TM': {px: -4.0, py: 0.0, rz: -90},
+            'TS0': {px: -5.0, py: 0.0, rz: 90},
+            'TS1': {px: 1.0, py: 2.0, rz: 180},
+            'SQ': {px: 0.0, py: 1.0, rz: 45},
+            'PL': {px: 0.5, py: -1.5, rz: 180, ry: 180},
+        }, 
+        {px: 0, py: 0, rz: 0}
+    ),
 });
 
 
