@@ -37,3 +37,13 @@ input[type="file"] {
     padding: 5px; /* Adds space around SVG */
     pointer-events: auto; /* Ensures interaction with the SVG */
 }
+
+
+.key-style {
+    font-weight: bold;
+    color: black;
+}
+
+.value-style {
+    color: blue;
+}

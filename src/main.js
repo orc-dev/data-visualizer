@@ -23,6 +23,37 @@ fileInput.addEventListener('change', event => {
     }
 });
 
+
+const displayMetaData = (metaData) => {
+    const container = document.getElementById('metadata-container');
+    container.innerHTML = ''; // Clear previous content
+
+    const ul = document.createElement('ul');
+
+    Object.entries(metaData).forEach(([key, value]) => {
+        const li = document.createElement('li');
+
+        // Create spans for key and value
+        const keySpan = document.createElement('span');
+        keySpan.textContent = `${key}: `;
+        keySpan.classList.add('key-style'); // Add CSS class
+
+        const valueSpan = document.createElement('span');
+        valueSpan.textContent = value;
+        valueSpan.classList.add('value-style'); // Add CSS class
+
+        // Append spans to list item
+        li.appendChild(keySpan);
+        li.appendChild(valueSpan);
+
+        ul.appendChild(li);
+    });
+
+    container.appendChild(ul);
+};
+
+
+
 // Read and process CSV file
 function visualizeCSVFile(file) {
     const reader = new FileReader();
@@ -35,6 +66,7 @@ function visualizeCSVFile(file) {
         const { rawMetaData, rawGameData } = extractRawData(lines);
         const { metaData, gameData } = parseRawData(rawMetaData, rawGameData);
         // TODO: add code to visualize metaData :::::::::::::::::::::: { TODO }
+        displayMetaData(metaData);
 
         // Partition data by puzzleId
         const puzzleData = groupByPuzzle(gameData);
@@ -65,11 +97,12 @@ function visualizePuzzle(puzzleId, puzzleData) {
     const lastTimeSec = toDailySeconds(lastTimeObj);
 
     const finalProgress = puzzleData[endIdx].PROGRESS;
+    const maxProgress = puzzleData[endIdx].MAX_PROGRESS;
     const TotalTimeSec = lastTimeSec - firstTimeSec;
 
     const finalStatus = (finalProgress === 100) 
         ? `SOLVED | ${TotalTimeSec} sec | ${endIdx} steps`
-        : `TIMEOUT | ${finalProgress}% | ${endIdx} steps`;
+        : `TIMEOUT | ${maxProgress}% | ${endIdx} steps`;
 
     // Formalize puzzle data
     puzzleData.forEach(d => {

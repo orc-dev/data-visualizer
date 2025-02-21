@@ -4,10 +4,20 @@ import { COLUMN_NAMES } from './constants.js';
 function extractMetaData(rawMeta) {
     let metaData = {};
 
+    const separateFirstColon = (line) => {
+        const index = line.indexOf(":"); // Find the first colon
+        if (index === -1) return [line, ""]; // No colon found, return full string in first part
+    
+        const firstPart = line.slice(0, index).trim();  // Before the colon
+        const secondPart = line.slice(index + 1).trim(); // After the colon
+    
+        return [firstPart, secondPart];
+    };
+
     rawMeta.forEach(line => {
         if (line.startsWith("#")) {
             // Remove '#' and split at ':'
-            const parts = line.slice(1).split(":"); 
+            const parts = separateFirstColon(line.slice(1)); 
             if (parts.length === 2) {
                 const key   = parts[0].trim();
                 const value = parts[1].trim();
