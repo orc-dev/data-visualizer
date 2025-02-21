@@ -56,6 +56,7 @@ export function parseRawData(rawMetaData, rawGameData) {
         console.warn('No data found in the CSV');
     }
     if (!validateColumns(Object.keys(gameData[0]))) {
+        console.log(gameData[0]);
         throw new Error('Column names mismatch.');
     }
     // Convert numeric columns
