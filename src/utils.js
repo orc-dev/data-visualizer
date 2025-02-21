@@ -34,7 +34,7 @@ export function extractRawData(lines) {
         if (line.startsWith('#')) {
             rawMetaData.push(line);  // Store meta comments
         } 
-        else if (line === "" || /^[,]+$/.test(line)) {
+        else if (line === "---" || /^[,]+$/.test(line)) {
             continue;
         } 
         else {

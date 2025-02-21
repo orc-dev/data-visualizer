@@ -1,5 +1,7 @@
 import { PieceState } from './PieceState.js';
 import { unit, sqrt2 } from '../constants.js';
+
+
 /* Utility functions on simple angle operations :::::::::::::::::::::::::::: */
 function degToRad(deg) {
     return deg * Math.PI / 180;
@@ -20,6 +22,7 @@ function toStandardDeg(deg) {
     }
     return deg;
 }
+
 
 /* Functions to determine the orientation of elemental triangles ::::::::::: */
 function mapToAtomFromTL(px, py, rz) {
@@ -112,7 +115,7 @@ const mapToAtom = {
 
 export class Puzzle {
     #name = 'unnamed-puzzle';
-    pieceStates = [];
+    pieceStates = undefined;
     atomData = [];
     atomStates = new Set();
     visibleCoordinate = {px: 0, py: 0, rz: 0};
@@ -127,8 +130,8 @@ export class Puzzle {
         return this.#name;
     }
 
-    getPiece(key, sid=0) {
-        return this.pieceStates[sid][key];
+    getPiece(key) {
+        return this.pieceStates[key];
     }
 
     displayPieces() {
@@ -136,22 +139,18 @@ export class Puzzle {
     }
 
     update(pattern) {
-        // Update piece states
-        this.pieceStates.length = 0;
-        for (const data of pattern) {
-            this.pieceStates.push(new PieceState(data));
-        }
+        this.pieceStates = new PieceState(pattern);
+        
         // Update atom data
         this.atomData.length = 0;
-        for (const ps of this.pieceStates) {
-            Object.keys(ps).forEach(key => {
-                this.atomData.push(...mapToAtom[key](ps[key]));
-            });
-        }
+        Object.entries(this.pieceStates).forEach(([key, value]) => {
+            this.atomData.push(...mapToAtom[key](value));
+        });
+        
         // Update atom states
         this.atomStates.clear();
-        this.atomData.forEach(data => this.atomStates.add(
-            this.#toAtomKey(...data)
+        this.atomData.forEach(e => this.atomStates.add(
+            this.#toAtomKey(...e)
         ));
     }
 
